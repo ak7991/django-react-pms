@@ -12,19 +12,19 @@ from .models import *
 # Create your views here.
 # Viewsets provides implementation for CRUD operations by default.
 
-
+# Homepage
 class ClientView(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
-    # queryset = Client.objects.all()
     permission_classes = [IsAuthenticated]
     authentication_classes = (TokenAuthentication, )
 
+    # List of incidents
     def get_queryset(self):
         user = self.request.user
         queryset = Client.objects.filter(user=user)
-
         return queryset
-
+    
+    # Create incident
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -63,12 +63,12 @@ class TodolistView(viewsets.ModelViewSet):
 
         return queryset
 
-
+# Create user
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
+# Authentication token generation
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request):
