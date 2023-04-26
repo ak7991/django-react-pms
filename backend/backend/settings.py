@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'api.apps.ApiConfig',
+    'incidents',
 ]
 
 MIDDLEWARE = [
