@@ -20,7 +20,7 @@ const Project = () => {
       },
     })
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((data) => setProjects(data))
       .catch((error) => console.log(error));
   }, [token]);
 
@@ -61,7 +61,7 @@ const Project = () => {
 
   const viewProjectDetail = (project) => {
     setActiveProject(project);
-    fetch(`http://127.0.0.1:8000/api/todos?project=${project.id}`, {
+    fetch(`http://127.0.0.1:8000/api/project?project=${project.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Project = () => {
     <div style={{ marginTop: "5em" }}>
       <div className="d-flex align-items-center justify-content-between">
         <div className="project-header">
-          <h1 style={{ color: "burlywood" }}>Your Exising Projects</h1>
+          <h1 style={{ color: "burlywood" }}>Your Existing Projects</h1>
         </div>
         <div className="project-header-btn d-flex">
           <div className="input-group">
@@ -101,6 +101,7 @@ const Project = () => {
         {projects.map((project) => {
           return (
             <div key={project.id} className="">
+              
               <h3>{project.name}</h3>
               <p>Deadline: {dateFormat(project.deadline, "mmmm dS, yyyy")}</p>
               <p>Description: {project.description}</p>
@@ -120,6 +121,7 @@ const Project = () => {
                 </button>
               </div>
               <hr />
+
             </div>
           );
         })}
