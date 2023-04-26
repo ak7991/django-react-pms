@@ -16,18 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from api import views
+from api import views as api_views
+from incidents import views as incident_views  # import apps
 
-router = routers.DefaultRouter()
-router.register(r'client', views.ClientView, 'client')
-router.register(r'project', views.ProjectView, 'project')
-router.register(r'todos', views.TodolistView, 'todos')
-router.register(r'users', views.UserView, 'users')
+api_router = routers.DefaultRouter()
+api_router.register(r'client', api_views.ClientView, 'client')
+api_router.register(r'project', api_views.ProjectView, 'project')
+api_router.register(r'todos', api_views.TodolistView, 'todos')
+api_router.register(r'users', api_views.UserView, 'users')
 
+incident_router = routers.DefaultRouter()
+incident_router.register(r'list', incident_views.IncidentView, 'list')
+# incident_router.register(r'create', incident_views.IncidentCreateView, 'create')
+# incident_router.register(r'edit', incident_views.IncidentEditView, 'edit')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('auth/', views.CustomAuthToken.as_view()),
+    path('auth/', api_views.CustomAuthToken.as_view()),
+    path('api/', include(api_router.urls)),
+    path('incident/', include(incident_router.urls)),
 ]
