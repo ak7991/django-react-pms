@@ -99,15 +99,13 @@ const Incident = () => {
       <hr className="bg-light" />
       <div className="proj-wrapper text-white">
         {projects.map((project) => {
-          // console.log("debugging entire project", project)
-          // console.log("debugging description", project.description)
           return (
             <div key={project.id} className="">
               <h3>{project.name}</h3>
               <p>Reported_on: {dateFormat(project.date_created, "hh:MM mmmm dS, yyyy")}</p>
               <p>Description: {project.description}</p>
               <p>Priority: {project.priority}</p>
-              <p>Status: {project.closed_status}</p>
+              <p>Status: {String(project.closed_status)}</p>
               <div className="project-btn-wrapper">
                 <button
                   onClick={() => viewProjectDetail(project)}

@@ -41,7 +41,7 @@ const DetailProject = (props) => {
           <h5><strong>Incident ID: </strong>{props.ActiveProject.name}</h5>
           <h5><strong>Incident priority: </strong>{props.ActiveProject.name}</h5>
           <h5>
-            <strong>Status: </strong>{props.ActiveProject.status}
+            <strong>Status: </strong>{props.ActiveProject.closed_status}
           </h5>
           <h5><strong>Reported Date: </strong>{dateFormat(props.ActiveProject.deadline, "mmmm dS, yyyy")}</h5>
           <h5><strong>Incident Details: </strong>{props.ActiveProject.description}</h5>

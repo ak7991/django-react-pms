@@ -9,8 +9,8 @@ function FormProject(props) {
   const [ProjectName, setProjectName] = useState("");
   const [ProjectDeadline, setProjectDeadline] = useState("");
   const [ProjectDescription, setProjectDescription] = useState("");
-  const [ProjectStatus, setProjectStatus] = useState("");
-  const [ProjectClient, setProjectClient] = useState("");
+  const [ProjectPriority, setProjectPriority] = useState("");
+  const [ProjectClosedStatus, setProjectClosedStatus] = useState("");
 
   const [clients, setClients] = useState([]);
 
@@ -20,23 +20,23 @@ function FormProject(props) {
     setProjectName(props.ProjectInstance.name);
     setProjectDeadline(props.ProjectInstance.deadline);
     setProjectDescription(props.ProjectInstance.description);
-    setProjectStatus(props.ProjectInstance.status);
-    setProjectClient(props.ProjectInstance.client);
+    setProjectPriority(props.ProjectInstance.priority);
+    setProjectClosedStatus(props.ProjectInstance.closed_status);
   }, [props.ProjectInstance]);
 
   // FETCH THE CLIENTS HERE TO BE RENDERED FOR THE DROPDOWN MENU IN THE FORM
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/client", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token["loginToken"]}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => setClients(response))
-      .catch((error) => console.log(error));
-  }, [token]);
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:8000/api/client", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Token ${token["loginToken"]}`,
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => setClients(response))
+  //     .catch((error) => console.log(error));
+  // }, [token]);
 
   const updateProject = () => {
     APIService.UpdateProject(
@@ -45,8 +45,8 @@ function FormProject(props) {
         name: ProjectName,
         deadline: ProjectDeadline,
         description: ProjectDescription,
-        status: ProjectStatus,
-        client: ProjectClient,
+        priority: ProjectPriority,
+        closed_status: ProjectClosedStatus,
       },
       token["loginToken"]
     ).then((response) => props.updatedProjects(response));
@@ -58,8 +58,8 @@ function FormProject(props) {
         name: ProjectName,
         deadline: ProjectDeadline,
         description: ProjectDescription,
-        status: ProjectStatus,
-        client: ProjectClient,
+        priority: ProjectPriority,
+        closed_status: ProjectClosedStatus,
       },
       token["loginToken"]
     ).then((response) => props.createdProject(response));
@@ -111,38 +111,56 @@ function FormProject(props) {
             onChange={(e) => setProjectDescription(e.target.value)}
           />
           <br />
-          <label htmlFor="status" className="form-label">
-            Project Status
+          <label htmlFor="priority" className="form-label">
+            Priority
           </label>
           <select
-            onChange={(e) => setProjectStatus(e.target.value)}
+            onChange={(e) => setProjectPriority(e.target.value)}
             className="form-select"
-            name="status"
-            id="status"
+            name="priority"
+            id="priority"
           >
             <option value="none" selected disabled hidden>
-              Select a Status...
+              Select a priority...
             </option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
           </select>
           <br />
 
+          <label htmlFor="closed_status" className="form-label">
+            Closed Status
+          </label>
           <select
-            onChange={(e) => setProjectClient(e.target.value)}
+            onChange={(e) => setProjectClosedStatus(e.target.value)}
             className="form-select"
-            name="client"
-            id="client"
+            name="closed_status"
+            id="closed_status"
           >
             <option value="none" selected disabled hidden>
-              Select a Client...
+              Select a close status...
+            </option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select>
+          <br />
+
+
+          {/* <select
+            onChange={(e) => setProjectClosedStatus(e.target.value)}
+            className="form-select"
+            name="closed_status"
+            id="closed_status"
+          >
+            <option value="none" selected disabled hidden>
+              Select a close status...
             </option>
             {clients.map((client) => {
               return <option value={client.name}>{client.name}</option>;
             })}
           </select>
-          <br />
+          <br /> */}
 
           {props.ProjectInstance.id ? (
             <button onClick={updateProject} className="btn btn-primary">
