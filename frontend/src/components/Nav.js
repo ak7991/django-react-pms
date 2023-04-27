@@ -1,10 +1,8 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React from "react";
-
-// import React, { useEffect } from "react";
-// import { useCookies, Cookies } from "react-cookie";
-// import { useHistory } from "react-router";
+import { useCookies, Cookies } from "react-cookie";
+import { useHistory } from "react-router";
 
 // Components
 import Home from "./pages/Home";
@@ -78,66 +76,6 @@ const Menu = ({ open, toggle }) => {
   );
 };
 
-const StyledBurger = styled.button`
-  position: fixed;
-  top: 5%;
-  right: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 10;
-
-  &:focus {
-    outline: none;
-  }
-
-  &:hover {
-    div:first-child,
-    div:nth-child(3) {
-      transform: ${({ open }) => (open ? "" : "scaleX(1)")};
-    }
-  }
-
-  div {
-    width: 2rem;
-    height: 0.25rem;
-    background: ${({ open }) => (open ? "white" : "white")};
-    transition: all 300ms linear;
-    position: relative;
-    transform-origin: 1px;
-
-    :first-child {
-      transform: ${({ open }) =>
-        open ? "rotate(45deg)" : "rotate(0) scaleX(0.5)"};
-    }
-
-    :nth-child(2) {
-      opacity: ${({ open }) => (open ? "0" : "1")};
-    }
-
-    :nth-child(3) {
-      transform: ${({ open }) =>
-        open ? "rotate(-45deg)" : "rotate(0) scaleX(0.7)"};
-    }
-  }
-`;
-
-const Burger = ({ open, toggle }) => {
-  return (
-    <StyledBurger open={open} onClick={toggle}>
-      <div />
-      <div />
-      <div />
-    </StyledBurger>
-  );
-};
-
 const Nav = () => {
   const [open, setOpen] = React.useState(false);
 
@@ -147,7 +85,7 @@ const Nav = () => {
 
   return (
     <div>
-      <Burger open={open} toggle={toggle} />
+      {/* <Burger open={open} toggle={toggle} /> */}
       <Menu open={open} toggle={toggle} />
     </div>
   );
