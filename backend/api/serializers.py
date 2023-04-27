@@ -8,7 +8,7 @@ from rest_framework.authtoken.views import Token
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incident
-        fields = ["name", "deadline", "date_created", "description", "user"]
+        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
