@@ -7,8 +7,10 @@ import "./Project.css";
 import FormProject from "./FormProject";
 import DetailProject from "./DetailProject";
 
-const Project = () => {
+const Incident = () => {
   const [projects, setProjects] = useState([]);
+  // const [incident, setIncidents] = useState([]);
+
   const [token] = useCookies(["loginToken"]);
 
   useEffect(() => {
@@ -57,7 +59,6 @@ const Project = () => {
   };
 
   const [ActiveProject, setActiveProject] = useState();
-  const [ProjectTodos, setProjectTodos] = useState();
 
   const viewProjectDetail = (project) => {
     setActiveProject(project);
@@ -68,15 +69,14 @@ const Project = () => {
         Authorization: `Token ${token["loginToken"]}`,
       },
     })
-      .then((response) => response.json())
-      .then((response) => setProjectTodos(response));
+      .then((response) => response.json());
   };
 
   return (
     <div style={{ marginTop: "5em" }}>
       <div className="d-flex align-items-center justify-content-between">
         <div className="project-header">
-          <h1 style={{ color: "burlywood" }}>Your Existing Projects</h1>
+          <h1 style={{ color: "burlywood" }}>Reported Incidents</h1>
         </div>
         <div className="project-header-btn d-flex">
           <div className="input-group">
@@ -91,7 +91,7 @@ const Project = () => {
             className="btn btn-primary btn-sm project-add-btn"
             onClick={projectNewForm}
           >
-            &#43; Add a new project
+            &#43; Report Incident
           </button>
         </div>
       </div>
@@ -99,13 +99,15 @@ const Project = () => {
       <hr className="bg-light" />
       <div className="proj-wrapper text-white">
         {projects.map((project) => {
+          // console.log("debugging entire project", project)
+          // console.log("debugging description", project.description)
           return (
             <div key={project.id} className="">
-              
               <h3>{project.name}</h3>
-              <p>Deadline: {dateFormat(project.deadline, "mmmm dS, yyyy")}</p>
+              <p>Reported_on: {dateFormat(project.date_created, "hh:MM mmmm dS, yyyy")}</p>
               <p>Description: {project.description}</p>
-              <p>Status: {project.status}</p>
+              <p>Priority: {project.priority}</p>
+              <p>Status: {project.closed_status}</p>
               <div className="project-btn-wrapper">
                 <button
                   onClick={() => viewProjectDetail(project)}
@@ -139,11 +141,10 @@ const Project = () => {
         <DetailProject
           ActiveProject={ActiveProject}
           setActiveProject={setActiveProject}
-          ProjectTodos={ProjectTodos}
         />
       ) : null}
     </div>
   );
 };
 
-export default Project;
+export default Incident;
