@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useCookies, Cookies } from "react-cookie";
-import { useHistory } from "react-router";
+import React from "react";
+
+// import React, { useEffect } from "react";
+// import { useCookies, Cookies } from "react-cookie";
+// import { useHistory } from "react-router";
 
 // Components
 import Home from "./pages/Home";
