@@ -35,13 +35,14 @@ class Incident(models.Model):
         target = prefix + five_random_nums + current_year
         return target
     
-    incident_id = models.CharField(max_length=12, unique=True, editable=False, default=create_inc_id)
+    incident_id = models.CharField(max_length=12, unique=True, editable=False, 
+                                   default=create_inc_id, null=False)
     date_created = models.DateField(auto_now_add=True, null=False, blank=False)
     description = models.TextField(max_length=128, null=True, blank=True)
-    priority = models.CharField(max_length=20, null=True, choices=PRIORITY)
+    priority = models.CharField(max_length=20, null=False, choices=PRIORITY)
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
-    closed_status = models.BooleanField(null=False, default=False)
+    closed_status = models.BooleanField(null=False, default=True)
 
     # def close_incident(self):
     #     if self.closed_status:
