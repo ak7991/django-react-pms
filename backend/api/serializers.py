@@ -3,9 +3,7 @@ from .models import *  # Importing all models
 from django.contrib.auth.models import User
 from rest_framework.authtoken.views import Token
 
-# As I have 3 models, hence I'm creating 3 serializers
-
-class ProjectSerializer(serializers.ModelSerializer):
+class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incident
         fields = "__all__"

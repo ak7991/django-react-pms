@@ -15,8 +15,7 @@ from .models import *
 
 
 class ProjectView(viewsets.ModelViewSet):
-    serializer_class = ProjectSerializer
-    # queryset = Project.objects.all()
+    serializer_class = IncidentSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = (TokenAuthentication, )
 
