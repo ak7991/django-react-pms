@@ -21,12 +21,12 @@ class ProjectView(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication, )
 
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['client', 'status']
+    filterset_fields = ['incident_id', 'date_created', 'priority', 
+                        'closed_status', 'description']
 
     def get_queryset(self):
         user = self.request.user
         queryset = Incident.objects.filter(user=user)
-
         return queryset
 
     def perform_create(self, serializer):
