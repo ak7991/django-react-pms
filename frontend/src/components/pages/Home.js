@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
-import Project from "../project/Project";
+import Incident from "../project/Project";
 
 const Home = () => {
   const [logUser, removeLogUser] = useCookies(["fname"]);
-  const [token, removeToken] = useCookies(["loginToken"]);
+  // const [token, removeToken] = useCookies(["loginToken"]);
   let history = useHistory();
 
   const logout = () => {
@@ -26,16 +26,7 @@ const Home = () => {
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
-    const date = new Date();
-    const liveHour = date.getHours();
-
-    if (liveHour < 12 && liveHour > 3) {
-      setGreeting("Good Morning");
-    } else if (liveHour >= 12 && liveHour <= 15) {
-      setGreeting("Good Afternoon");
-    } else {
-      setGreeting("Good Evening");
-    }
+    setGreeting("Hello, ");
   }, []);
 
   return (
@@ -45,11 +36,7 @@ const Home = () => {
         style={{ marginTop: "5em" }}
       >
         <div className="text-wrapper">
-          <h1>{greeting}</h1>
-          <h1 style={{ fontSize: "7rem", color: "burlywood" }}>
-            {logUser["fname"]}
-          </h1>
-          <h3>What would you like to do today?</h3>
+          <h1>{greeting} {logUser["fname"]}</h1>
         </div>
         <div className="logout-wrapper">
           <button onClick={logout} className="btn btn-primary">
@@ -58,7 +45,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Project />
+      <Incident />
     </div>
   );
 };
