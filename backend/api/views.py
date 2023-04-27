@@ -12,21 +12,6 @@ from .models import *
 # Create your views here.
 # Viewsets provides implementation for CRUD operations by default.
 
-# Homepage
-class ClientView(viewsets.ModelViewSet):
-    serializer_class = ClientSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (TokenAuthentication, )
-
-    # List of incidents
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Client.objects.filter(user=user)
-        return queryset
-    
-    # Create incident
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 
 class ProjectView(viewsets.ModelViewSet):
@@ -40,28 +25,13 @@ class ProjectView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Project.objects.filter(user=user)
+        queryset = Incident.objects.filter(user=user)
 
         return queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
-class TodolistView(viewsets.ModelViewSet):
-    serializer_class = TodolistSerializer
-    # queryset = Todolist.objects.all()
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (TokenAuthentication, )
-
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['project', 'status']
-
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Todolist.objects.filter(user=user)
-
-        return queryset
 
 # Create user
 class UserView(viewsets.ModelViewSet):
