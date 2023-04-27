@@ -17,8 +17,8 @@ const StyledProjectDetail = styled.div`
 
   .project-detail-card {
     background-color: rgb(20, 26, 31);
-    width: 1000px;
-    padding: 2em 5em;
+    width: 400px;
+    padding: 1em 2em;
     position: relative;
   }
 `;
@@ -29,7 +29,7 @@ const DetailProject = (props) => {
       <div className="project-detail-card text-white">
         <div className="project-detail">
           <div className="project-detail-header d-flex align-items-center justify-content-between">
-            <h1>Project Details</h1>
+            <h3>Incident Details</h3>
             <button
               onClick={() => props.setActiveProject(null)}
               className="btn btn-primary"
@@ -38,43 +38,17 @@ const DetailProject = (props) => {
             </button>
           </div>
           <hr />
-          <h2>{props.ActiveProject.name}</h2>
-          <h5>{dateFormat(props.ActiveProject.deadline, "mmmm dS, yyyy")}</h5>
-          <h5>{props.ActiveProject.description}</h5>
+          <h5><strong>Incident ID: </strong>{props.ActiveProject.name}</h5>
+          <h5><strong>Incident priority: </strong>{props.ActiveProject.name}</h5>
           <h5>
-            <strong>{props.ActiveProject.status}</strong>
+            <strong>Status: </strong>{props.ActiveProject.status}
           </h5>
+          <h5><strong>Reported Date: </strong>{dateFormat(props.ActiveProject.deadline, "mmmm dS, yyyy")}</h5>
+          <h5><strong>Incident Details: </strong>{props.ActiveProject.description}</h5>
         </div>
         <br />
         <br />
-        <div className="project-todos">
-          <h1>Todos</h1>
-          <hr />
-          <table className="table text-white">
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Targetted Time</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.ProjectTodos
-                ? props.ProjectTodos.map((todos) => {
-                    return (
-                      <tr key={todos.id}>
-                        <td>{todos.task}</td>
-                        <td>
-                          {dateFormat(todos.target_time, "mmmm dS, yyyy")}
-                        </td>
-                        <td>{todos.status}</td>
-                      </tr>
-                    );
-                  })
-                : null}
-            </tbody>
-          </table>
-        </div>
+       
       </div>
     </StyledProjectDetail>
   );
