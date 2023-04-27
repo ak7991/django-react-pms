@@ -17,23 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from api import views as api_views
-from incidents import views as incident_views  # import apps
 
 api_router = routers.DefaultRouter()
-api_router.register(r'client', api_views.ClientView, 'client')
 api_router.register(r'project', api_views.ProjectView, 'project')
-api_router.register(r'todos', api_views.TodolistView, 'todos')
 api_router.register(r'users', api_views.UserView, 'users')
-
-incident_router = routers.DefaultRouter()
-incident_router.register(r'list', incident_views.IncidentView, 'list')
-# incident_router.register(r'create', incident_views.IncidentCreateView, 'create')
-# incident_router.register(r'edit', incident_views.IncidentEditView, 'edit')
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', api_views.CustomAuthToken.as_view()),
-    path('api/', include(api_router.urls)),
-    path('incident/', include(incident_router.urls)),
+    path('api/', include(api_router.urls))
 ]

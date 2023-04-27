@@ -5,28 +5,10 @@ from rest_framework.authtoken.views import Token
 
 # As I have 3 models, hence I'm creating 3 serializers
 
-
-class ClientSerializer(serializers.ModelSerializer):
-    # Alternative to the 'perform_create' function in views.py, to automatically fills
-    # in the user field with the current/logged in user, use the code below.
-    # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = Client  # Specify the model you want to serialize
-        fields = '__all__'  # Specify the fields you want to serialize
-
-
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Project
-        fields = '__all__'
-
-
-class TodolistSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Todolist
-        fields = '__all__'
-
+        model = Incident
+        fields = ["name", "deadline", "date_created", "description", "user"]
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
