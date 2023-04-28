@@ -102,6 +102,7 @@ const Incident = () => {
           return (
             <div key={project.id} className="">
               <h3>{project.name}</h3>
+              <p>Incident ID: {project.incident_id} </p>
               <p>Reported_on: {dateFormat(project.date_created, "hh:MM mmmm dS, yyyy")}</p>
               <p>Description: {project.description}</p>
               <p>Priority: {project.priority}</p>
