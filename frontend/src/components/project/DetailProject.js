@@ -38,12 +38,12 @@ const DetailProject = (props) => {
             </button>
           </div>
           <hr />
-          <h5><strong>Incident ID: </strong>{props.ActiveProject.name}</h5>
-          <h5><strong>Incident priority: </strong>{props.ActiveProject.name}</h5>
+          <h5><strong>Incident ID: </strong>{props.ActiveProject.incident_id}</h5>
+          <h5><strong>Incident priority: </strong>{props.ActiveProject.priority}</h5>
           <h5>
-            <strong>Status: </strong>{props.ActiveProject.closed_status}
+            <strong>Status: </strong>{String(props.ActiveProject.closed_status)}
           </h5>
-          <h5><strong>Reported Date: </strong>{dateFormat(props.ActiveProject.deadline, "mmmm dS, yyyy")}</h5>
+          <h5><strong>Reported Date: </strong>{dateFormat(props.ActiveProject.reported_on, "mmmm dS, yyyy")}</h5>
           <h5><strong>Incident Details: </strong>{props.ActiveProject.description}</h5>
         </div>
         <br />
