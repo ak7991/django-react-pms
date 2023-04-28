@@ -26,3 +26,4 @@
 .env
 __pycache__/
 *.py[cod]
+backend/db.sqlite*
