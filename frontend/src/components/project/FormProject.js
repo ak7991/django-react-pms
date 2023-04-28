@@ -6,7 +6,7 @@ import "../Modal.css";
 import APIService from "../../APIService";
 
 function FormProject(props) {
-  const [ProjectName, setProjectName] = useState("");
+  const [ProjectIncidentId, setProjectIncidentId] = useState("");
   const [ProjectDeadline, setProjectDeadline] = useState("");
   const [ProjectDescription, setProjectDescription] = useState("");
   const [ProjectPriority, setProjectPriority] = useState("");
@@ -17,7 +17,7 @@ function FormProject(props) {
   const [token, setToken] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    setProjectName(props.ProjectInstance.name);
+    // setProjectName(props.ProjectInstance.name);
     setProjectDeadline(props.ProjectInstance.deadline);
     setProjectDescription(props.ProjectInstance.description);
     setProjectPriority(props.ProjectInstance.priority);
@@ -42,7 +42,7 @@ function FormProject(props) {
     APIService.UpdateProject(
       props.ProjectInstance.id,
       {
-        name: ProjectName,
+        incident_id: ProjectIncidentId,
         deadline: ProjectDeadline,
         description: ProjectDescription,
         priority: ProjectPriority,
@@ -55,7 +55,6 @@ function FormProject(props) {
   const createProject = () => {
     APIService.CreateProject(
       {
-        name: ProjectName,
         deadline: ProjectDeadline,
         description: ProjectDescription,
         priority: ProjectPriority,
@@ -75,30 +74,6 @@ function FormProject(props) {
           >
             x
           </button>
-          <label htmlFor="name" className="form-label">
-            Project Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            placeholder="Enter project's name..."
-            value={ProjectName}
-            onChange={(e) => setProjectName(e.target.value)}
-          />
-          <br />
-          <label htmlFor="deadline" className="form-label">
-            Project Deadline
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            id="deadline"
-            placeholder="Enter project's deadline..."
-            value={ProjectDeadline}
-            onChange={(e) => setProjectDeadline(e.target.value)}
-          />
-          <br />
           <label htmlFor="description" className="form-label">
             Project Description
           </label>
@@ -119,6 +94,8 @@ function FormProject(props) {
             className="form-select"
             name="priority"
             id="priority"
+            value={ProjectPriority}
+            // placeholder="Enter Priority"
           >
             <option value="none" selected disabled hidden>
               Select a priority...
@@ -137,10 +114,9 @@ function FormProject(props) {
             className="form-select"
             name="closed_status"
             id="closed_status"
+            value={ProjectClosedStatus}
+
           >
-            <option value="none" selected disabled hidden>
-              Select a close status...
-            </option>
             <option value="True">True</option>
             <option value="False">False</option>
           </select>
