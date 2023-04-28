@@ -39,7 +39,7 @@ class Incident(models.Model):
                                    default=create_inc_id, null=False)
     date_created = models.DateField(auto_now_add=True, null=False, blank=False)
     description = models.TextField(max_length=128, null=True, blank=True)
-    priority = models.CharField(max_length=20, null=False, choices=PRIORITY)
+    priority = models.CharField(max_length=20, null=False, choices=PRIORITY, default="LOW")
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
     closed_status = models.BooleanField(null=False, default=True)
